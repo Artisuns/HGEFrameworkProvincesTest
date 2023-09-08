@@ -8,8 +8,9 @@
     <script defer src="hge-framework-alpha.js"></script>
 </head>
 <body style="margin: 0%; padding: 0%;">
-    <game-win width="1495" height="715" backgroundcolor=" 0xE0FFFE"></game-win>
+    <game-win width="window.innerWidth" height="window.innerHeight" backgroundcolor=" 0xE0FFFE"></game-win>
     <scene-start>
+        resizetowindow()
         function tintit(e)
         {
             e.currentTarget.tint = 0xa0a0a0;
