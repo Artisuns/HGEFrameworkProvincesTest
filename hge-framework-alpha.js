@@ -210,7 +210,7 @@ class GameButton extends HTMLElement
                 }
                 let buttononclick = interpretehgelang(this.innerHTML, false)
                 this.innerHTML = ""
-                let buttonresult = `${this.attributes.name.value}.interactive = true;${this.attributes.name.value}.on('mousedown', function(e){${buttononclick}});app.stage.addChild(${this.attributes.name.value});`
+                let buttonresult = `${this.attributes.name.value}.interactive = true;${this.attributes.name.value}.on('pointertap', function(e){${buttononclick}});app.stage.addChild(${this.attributes.name.value});`
                 compiledresult = compiledresult.concat(buttonresult)
             }
             else
