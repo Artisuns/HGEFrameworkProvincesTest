@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProvincesTest</title>
+    <script src="pixi.min.js"></script>
+    <script defer src="hge-framework-alpha.js"></script>
+</head>
+<body style="margin: 0%; padding: 0%;">
+    <game-win width="window.innerWidth" height="window.innerHeight" backgroundcolor=" 0xE0FFFE"></game-win>
+    <scene-start>
+        function tintit(e)
+        {
+            e.currentTarget.tint = 0xa0a0a0;
+        }
+        function untintit(e)
+        {
+            e.currentTarget.tint = 0xFFFFFF;
+        }
+        function destroyinfobox()
+        {
+            destroyobj(infoboxback)
+            destroyobj(nametxt)
+            destroyobj(infotxt)
+            destroyobj(infoimg)
+        }
+        function destroywait()
+        {
+            destroyobj(waitback)
+            destroyobj(waittxt)
+        }
+        async function createinfobox(provincename, destroywaitvar)
+        {
+            let url = `https://en.wikipedia.org/api/rest_v1/page/summary/${provincename}`
+            let syns
+            let response
+            try 
+            {
+                response = await fetch(url)
+                syns = await response.json()
+                syns = await Object.values(syns)
+                if (destroywaitvar)
+                {
+                    destroywait()
+                }
+                createobj("infoboxback", "images/infoboxback.png", 1000, 200, 500, 400)
+                createtext("nametxt", syns[1], 1003, 200, `const nametxtstyle = new PIXI.TextStyle({
+                    fill: "#ffffff",
+                    fontFamily: "Georgia, serif",
+                    fontSize: 40
+                });`)
+                createtext("infotxt", syns[18], 1003, 267, `const infotxtstyle = new PIXI.TextStyle({
+                    fill: "#ffffff",
+                    fontFamily: "Georgia, serif",
+                    fontSize: 13,
+                    wordWrap: true,
+                    wordWrapWidth: 420
+                });`)
+                createobj("infoimg", syns[7].source, 1150, 500, 150, 75)
+            }
+            catch(err)
+            {
+                console.log(err)
+            }
+        }
+        function createwaitbox()
+        {
+            try 
+            {
+                createobj("waitback", "images/infoboxback.png", 1000, 200, 500, 400)
+                createtext("waittxt", "Wait Please...", 1003, 200, `const waittxtstyle = new PIXI.TextStyle({
+                    fill: "#ffffff",
+                    fontFamily: "Georgia, serif",
+                    fontSize: 50
+                });`)
+            }
+            catch(err)
+            {
+                console.log(err)
+            }
+        }
+        let punjabhitbox = [
+        633, 596,
+        787, 279,
+        903, 357,
+        735, 633
+        ];
+        let pakhtunwahitbox = [
+        616, 361,
+        728, 228,
+        747, 105,
+        839, 172,
+        696, 309,
+        671, 400
+        ];
+        let sindhhitbox = [
+        477, 872,
+        511, 779,
+        525, 670,
+        600, 733,
+        684, 875
+        ];
+        let islamabadhitbox = [
+        811, 266,
+        820, 264,
+        829, 260,
+        835, 265,
+        831, 275,
+        823, 265,
+        812, 269
+        ];
+        let gilgithitbox = [
+        803, 100,
+        925, 50,
+        1036, 173,
+        969, 193
+        ];
+        let kashmirhitbox = [
+        895, 319,
+        861, 290,
+        852, 212,
+        875, 190,
+        893, 175,
+        913, 179,
+        947, 190,
+        916, 190,
+        1300, 974,
+        873, 197,
+        863, 216,
+        880, 291
+        ];
+        let balochistanhitbox = [
+        145, 548,
+        450, 513,
+        606, 405,
+        594, 607,
+        480, 634,
+        452, 725,
+        467, 815,
+        179, 824,
+        297, 704,
+        216, 617
+        ];
+        createinfobox("Pakistan", false);
+    </scene-start>
+    <game-button name="punjabbtn" sprite="images/punjab.png" width="650" height="487">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Punjab,_Pakistan", true);
+    </game-button>
+    <game-button name="pakhtunwabtn" sprite="images/pakhtunwa.png" width="650" height="487">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Khyber_Pakhtunkhwa", true);
+    </game-button>
+    <game-button name="sindhbtn" sprite="images/sindh.png" width="650" height="487">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Sindh", true);
+    </game-button>
+    <game-button name="islamabadbtn" sprite="images/islamabad.png" width="650" height="487">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Islamabad_Capital_Territory", true);
+    </game-button>
+    <game-button name="gilgitbtn" sprite="images/gilgit.png" width="650" height="487">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Gilgit_Baltistan", true);
+    </game-button>
+    <game-button name="kashmirbtn" sprite="images/kashmir.png" width="650" height="487">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Azad_Kashmir", true);
+    </game-button>
+    <game-button name="balochistanbtn" sprite="images/balochistan.png" width="650" height="487">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Balochistan", true);
+    </game-button>
+    <scene-start>
+        punjabbtn.hitArea = new PIXI.Polygon(punjabhitbox);
+        pakhtunwabtn.hitArea = new PIXI.Polygon(pakhtunwahitbox);
+        sindhbtn.hitArea = new PIXI.Polygon(sindhhitbox);
+        islamabadbtn.hitArea = new PIXI.Polygon(islamabadhitbox);
+        gilgitbtn.hitArea = new PIXI.Polygon(gilgithitbox);
+        kashmirbtn.hitArea = new PIXI.Polygon(kashmirhitbox);
+        balochistanbtn.hitArea = new PIXI.Polygon(balochistanhitbox);
+        punjabbtn.on("mouseover", tintit)
+        punjabbtn.on("mouseout", untintit)
+        pakhtunwabtn.on("mouseover", tintit)
+        pakhtunwabtn.on("mouseout", untintit)
+        sindhbtn.on("mouseover", tintit)
+        sindhbtn.on("mouseout", untintit)
+        gilgitbtn.on("mouseover", tintit)
+        gilgitbtn.on("mouseout", untintit)
+        islamabadbtn.on("mouseover", tintit)
+        islamabadbtn.on("mouseout", untintit)
+        balochistanbtn.on("mouseover", tintit)
+        balochistanbtn.on("mouseout", untintit)
+        kashmirbtn.on("mouseover", tintit)
+        kashmirbtn.on("mouseout", untintit)
+    </scene-start>
+</body>
+</html>
