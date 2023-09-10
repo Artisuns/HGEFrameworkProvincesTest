@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProvincesTest: Canada</title>
+    <script src="pixi.min.js"></script>
+    <script defer src="hge-framework-alpha.js"></script>
+</head>
+<body style="margin: 0%; padding: 0%;">
+    <game-win width="1495" height="715" backgroundcolor="0xFF5B61"></game-win>
+    <scene-start>
+        resizetowindow()
+        function tintit(e)
+        {
+            e.currentTarget.tint = 0xa0a0a0;
+        }
+        function untintit(e)
+        {
+            e.currentTarget.tint = 0xFFFFFF;
+        }
+        function destroyinfobox()
+        {
+            destroyobj(infoboxback)
+            destroyobj(nametxt)
+            destroyobj(infotxt)
+            destroyobj(infoimg)
+        }
+        function destroywait()
+        {
+            destroyobj(waitback)
+            destroyobj(waittxt)
+        }
+        async function createinfobox(provincename, destroywaitvar, info=18)
+        {
+            let url = `https://en.wikipedia.org/api/rest_v1/page/summary/${provincename}`
+            let syns
+            let response
+            try 
+            {
+                response = await fetch(url)
+                syns = await response.json()
+                syns = await Object.values(syns)
+                console.log(syns)
+                if (destroywaitvar)
+                {
+                    destroywait()
+                }
+                createobj("infoboxback", "images/infoboxback.png", 1000, 200, 500, 400)
+                createtext("nametxt", syns[1], 1003, 200, `const nametxtstyle = new PIXI.TextStyle({
+                    fill: "#ffffff",
+                    fontFamily: "Georgia, serif",
+                    fontSize: 35
+                });`)
+                createtext("infotxt", `${syns[info].replaceAll('"', "")}`, 1003, 267, `const infotxtstyle = new PIXI.TextStyle({
+                    fill: "#ffffff",
+                    fontFamily: "Georgia, serif",
+                    fontSize: 13,
+                    wordWrap: true,
+                    wordWrapWidth: 420
+                });`)
+                createobj("infoimg", syns[7].source, 1150, 500, 150, 75)
+            }
+            catch(err)
+            {
+                console.log(err)
+            }
+        }
+        function createwaitbox()
+        {
+            try 
+            {
+                createobj("waitback", "images/infoboxback.png", 1000, 200, 500, 400)
+                createtext("waittxt", "Wait Please...", 1003, 200, `const waittxtstyle = new PIXI.TextStyle({
+                    fill: "#ffffff",
+                    fontFamily: "Georgia, serif",
+                    fontSize: 50
+                });`)
+            }
+            catch(err)
+            {
+                console.log(err)
+            }
+        }
+        let saskhitarea = new PIXI.Polygon(
+            [
+            490, 874,
+            526, 606,
+            614, 614,
+            616, 883
+            ])
+        let albhitarea = new PIXI.Polygon(
+            [
+            470, 871,
+            510, 605,
+            397, 580,
+            353, 731,
+            411, 820,
+            416, 864
+            ])
+        let brchitarea = new PIXI.Polygon(
+            [
+            184, 488,
+            231, 843,
+            397, 861,
+            336, 732,
+            382, 577
+            ])
+        let yknhitarea = new PIXI.Polygon(
+            [
+            301, 533,
+            300, 309,
+            322, 301,
+            309, 273,
+            172, 458
+            ])
+        let nothitarea = new PIXI.Polygon(
+            [
+            328, 315,
+            452, 347,
+            446, 369,
+            613, 512,
+            616, 598,
+            354, 552,
+            352, 532,
+            327, 521
+            ])
+        let mtbhitarea = new PIXI.Polygon([
+        631, 615,
+        711, 609,
+        796, 681,
+        718, 790,
+        724, 844,
+        724, 883,
+        633, 887
+        ])
+        let onthitarea = new PIXI.Polygon(
+            [
+            810,695,
+            906,728,
+            935,785,
+            973,809,
+            1002,892,
+            1007,913,
+            1077,929,
+            1097,908,
+            1057,960,
+            1029,973,
+            1017,996,
+            1036,995,
+            982,1032,
+            997,968,
+            1024,956,
+            999,928,
+            936,926,
+            906,888,
+            872,865,
+            832,888,
+            822,902,
+            768,893,
+            752,893,
+            740,869,
+            733,801
+            ])
+        let qbchitarea = new PIXI.Polygon(
+            [
+            100,898,
+            1027,899,
+            992,811,
+            994,752,
+            967,710,
+            992,655,
+            955,594,
+            940,596,
+            946,556,
+            923,516,
+            957,497,
+            1004,516,
+            1067,568,
+            1089,550,
+            1082,511,
+            1163,607,
+            1116,624,
+            1114,661,
+            1153,698,
+            1201,687,
+            1270,630,
+            1277,640,
+            1257,693,
+            1196,725,
+            1176,735,
+            1159,782,
+            1141,814,
+            1146,830,
+            ])
+        let nalhitarea = new PIXI.Polygon(
+            [
+            1082,497,
+            1184,573,
+            1233,572,
+            1249,594,
+            1257,585,
+            1292,615,
+            1371,674,
+            1392,704,
+            1364,721,
+            1352,710,
+            1311,735,
+            1294,718,
+            1292,636,
+            1275,624,
+            1196,672,
+            1184,650,
+            1172,681,
+            1133,663,
+            1123,645,
+            1126,626,
+            1163,622,
+            1157,593
+            ])
+        let nschitarea = new PIXI.Polygon(
+            [
+            1263,835,
+            1254,831,
+            1260,818,
+            1284,821,
+            1287,815,
+            1301,767,
+            1316,785,
+            1311,814,
+            1266,884,
+            1260,892,
+            1249,881,
+            1249,863
+            ])
+        let nbrhitarea = new PIXI.Polygon(
+            [
+            1178,816,
+            1182,803,
+            1204,797,
+            1213,787,
+            1223,790,
+            1227,807,
+            1237,813,
+            1252,819,
+            1254,821,
+            1228,858,
+            1214,862,
+            1198,832
+            ])
+        let peihitarea = new PIXI.Polygon(
+            [
+            1249,797,
+            1281,798,
+            1277,811,
+            1252,809,
+            1243,805
+            ])
+        let nunhitarea = new PIXI.Polygon(
+            [
+            468,352,
+            512,179,
+            749,30,
+            781,38,
+            781,215,
+            1026,349,
+            1066,467,
+            888,454,
+            888,454,
+            897,533,
+            897,533,
+            800,499,
+            762,497,
+            719,608,
+            719,608,
+            622,605,
+            622,605,
+            628,492,
+            614,495,
+            614,495,
+            549,472,
+            522,452,
+            491,449,
+            485,419,
+            467,401,
+            453,379
+            ])
+        createinfobox("Canada", false);
+    </scene-start>
+    <game-button name="saskbtn" sprite="images/saskatchewan.png" width="800" height="584">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Saskatchewan", true);
+    </game-button>
+    <game-button name="albbtn" sprite="images/alberta.png" width="800" height="584">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Alberta", true);
+    </game-button>
+    <game-button name="brcbtn" sprite="images/bc.png" width="800" height="584">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("British_Columbia", true);
+    </game-button>
+    <game-button name="yknbtn" sprite="images/yukon.png" width="800" height="584">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Yukon", true);
+    </game-button>
+    <game-button name="notbtn" sprite="images/nt.png" width="800" height="584">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Northwest_Territories", true);
+    </game-button>
+    <game-button name="mtbbtn" sprite="images/manitoba.png" width="800" height="584">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Manitoba", true);
+    </game-button>
+    <game-button name="ontbtn" sprite="images/ontario.png" width="800" height="584">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Ontario", true);
+    </game-button>
+    <game-button name="qbcbtn" sprite="images/quebec.png" width="800" height="584">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Quebec", true);
+    </game-button>
+    <game-button name="nalbtn" sprite="images/nal.png" width="800" height="584">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Newfoundland_And_Labrador", true);
+    </game-button>
+    <game-button name="nscbtn" sprite="images/ns.png" width="800" height="584">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Nova_Scotia", true);
+    </game-button>
+    <game-button name="nbrbtn" sprite="images/nb.png" width="800" height="584">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("New_Brunswick", true, 17);
+    </game-button>
+    <game-button name="peibtn" sprite="images/pei.png" width="800" height="584">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Prince_Edward_Island", true);
+    </game-button>
+    <game-button name="nunbtn" sprite="images/nunavat.png" width="800" height="584">
+        destroyinfobox();
+        createwaitbox();
+        createinfobox("Nunavat", true);
+    </game-button>
+    <scene-start>
+        saskbtn.hitArea = saskhitarea
+        saskbtn.on("mouseover", tintit)
+        saskbtn.on("mouseout", untintit)
+        albbtn.hitArea = albhitarea
+        albbtn.on("mouseover", tintit)
+        albbtn.on("mouseout", untintit)
+        brcbtn.hitArea = brchitarea
+        brcbtn.on("mouseover", tintit)
+        brcbtn.on("mouseout", untintit)
+        yknbtn.hitArea = yknhitarea
+        yknbtn.on("mouseover", tintit)
+        yknbtn.on("mouseout", untintit)
+        notbtn.hitArea = nothitarea
+        notbtn.on("mouseover", tintit)
+        notbtn.on("mouseout", untintit)
+        mtbbtn.hitArea = mtbhitarea
+        mtbbtn.on("mouseover", tintit)
+        mtbbtn.on("mouseout", untintit)
+        ontbtn.hitArea = onthitarea
+        ontbtn.on("mouseover", tintit)
+        ontbtn.on("mouseout", untintit)
+        qbcbtn.hitArea = qbchitarea
+        qbcbtn.on("mouseover", tintit)
+        qbcbtn.on("mouseout", untintit)
+        nalbtn.hitArea = nalhitarea
+        nalbtn.on("mouseover", tintit)
+        nalbtn.on("mouseout", untintit)
+        nscbtn.hitArea = nschitarea
+        nscbtn.on("mouseover", tintit)
+        nscbtn.on("mouseout", untintit)
+        nbrbtn.hitArea = nbrhitarea
+        nbrbtn.on("mouseover", tintit)
+        nbrbtn.on("mouseout", untintit)
+        peibtn.hitArea = peihitarea
+        peibtn.on("mouseover", tintit)
+        peibtn.on("mouseout", untintit)
+        nunbtn.hitArea = nunhitarea
+        nunbtn.on("mouseover", tintit)
+        nunbtn.on("mouseout", untintit)
+    </scene-start>
+</body>
+</html>

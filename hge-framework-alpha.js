@@ -670,12 +670,11 @@ function createplayer(name, sprite, x, y, width, height, speed)
 function resizetowindow()
 {
     let ccode = `
-    app.renderer.resize(window.innerWidth, window.innerHeight)
     function resizef() {
-
-        app.view.style.width = window.innerWidth + 'px';
-        app.view.style.height = window.innerHeight + 'px';
-    
+        app.view.style.width = "100%"; app.view.style.height = "100%";
+        app.view.width = window.innerWidth; app.view.height = window.innerHeight;
+        app.stage.scale.x = window.innerWidth * 0.00066889632
+        app.stage.scale.y  = window.innerHeight * 0.00139860139
     }
     resizef();`
     Function(ccode)()
